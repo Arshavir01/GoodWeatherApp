@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_map"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:background="#FFFFFF"
+    android:paddingTop="30dp"
+
+
+    tools:context="com.example.user.goodweatherapp.MapActivity">
+
+    <EditText
+        android:layout_width="610dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Search"
+        android:textColorHint="#BDBDBD"
+        android:textColor="#000000"
+        android:ems="10"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/editTextId" />
+
+
+    <ImageView
+        android:layout_width="620dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/map2"
+        android:id="@+id/imageView"
+        android:layout_below="@+id/editTextId" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/search_icon2"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="520dp"
+        android:background="#FFFFFF"
+        android:onClick="goBack"
+        android:id="@+id/imageButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16dp"
+        android:textColor="#424242"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/LatitudeId"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16dp"
+        android:textColor="#424242"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/LongitudeId"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20dp"
+        android:textColor="#424242"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/cityId"/>
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:src="@drawable/search_latlng"
+        android:layout_marginLeft="490dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:onClick="searchLocationClick"/>
+
+
+
+
+
+
+</RelativeLayout>

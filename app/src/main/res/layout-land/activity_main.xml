@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:background="@drawable/back"
+    tools:context="com.example.user.goodweatherapp.MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Country"
+        android:textColor="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:id="@+id/countryId"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temperature"
+        android:textColor="#FFFFFF"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:id="@+id/tempertaureId"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:textColor="#FFFFFF"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:id="@+id/description"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="280dp"
+        android:layout_marginLeft="320dp"
+        android:id="@+id/latId"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="320dp"
+        android:id="@+id/lngId"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/sunriseId"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="155dp"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/sunsetId"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/humidityId"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="210dp"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/pressureId"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/tempMinId"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="240dp"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/tempMaxId"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="295dp"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/windId"/>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/earth3"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="125dp"
+        android:id="@+id/earthImageViewId" />
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/search_12"
+        android:layout_marginLeft="510dp"
+        android:layout_marginTop="10dp"
+        android:background="#00FFFFFF"
+        android:onClick="goToMap"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/refresh_64"
+        android:layout_marginLeft="510dp"
+        android:layout_marginTop="70dp"
+        android:background="#00FFFFFF"
+        android:onClick="resetCurrentWeather"/>
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/calendar_64"
+        android:layout_marginTop="268dp"
+        android:layout_marginLeft="510dp"
+        android:background="#00FFFFFF"
+        android:onClick="calendarClick"
+        android:id="@+id/imageButton2" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/temperature"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="515dp"
+        android:background="#00FFFFFF"
+        android:onClick="detailsClick"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/latlng"
+        android:background="#00FFFFFF"
+        android:onClick="latitudeClick"
+        android:layout_marginTop="205dp"
+        android:layout_marginLeft="510dp"
+        android:id="@+id/imageButton3" />
+
+
+</RelativeLayout>
