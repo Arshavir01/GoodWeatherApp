@@ -1,22 +1,18 @@
 package com.example.user.goodweatherapp;
 
-import android.Manifest;
+
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import io.nlopez.smartlocation.OnLocationUpdatedListener;
+import io.nlopez.smartlocation.SmartLocation;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,17 +30,10 @@ public class MainActivity extends AppCompatActivity {
     static TextView tempMinTV; // using in MapActivity
     static TextView tempMaxTV; // using in MapActivity
     static TextView windTV; // using in MapActivity
+    static ProgressDialog dialog;
 
     double curLat;
     double curLng;
-
-
-
-    static ProgressDialog dialog;
-    LocationManager locationManager;
-    Location location;
-    String PROVIDER ;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,111 +60,68 @@ public class MainActivity extends AppCompatActivity {
         dialog.setMessage("Loading...");
         dialog.show();
 
-        //find my current location
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        PROVIDER = locationManager.getBestProvider(new Criteria(), false);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            return;
-        }
-
-        //find my current location from GPS
-        location = locationManager.getLastKnownLocation(PROVIDER);
-        locationManager.requestLocationUpdates(PROVIDER, 20000, 2, listener);
-        showLocation(location);
-
+         showLocation();
 
     }
 
-    // take my current Latitude and Longitude from GPS provider
-    public void showLocation(Location location) {
-        if (location == null) {
-            Toast.makeText(getApplicationContext(), "Location Not Found", Toast.LENGTH_SHORT).show();
-            locationManager.requestLocationUpdates(PROVIDER, 0, 0, listener);
-        } else {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                    ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
+    //start crazy things,,,/find my current location
+    public void showLocation(){
 
-            curLat = location.getLatitude();
-            curLng = location.getLongitude();
+        //check for my phone location is turned off/on
+        if(SmartLocation.with(MainActivity.this).location().state().isAnyProviderAvailable()){
+
+            SmartLocation.with(this).location().start(new OnLocationUpdatedListener() {
+
+                @Override
+                public void onLocationUpdated(Location location) {
+                    if (location == null) {
+                        Toast.makeText(getApplicationContext(), "Location Not Found", Toast.LENGTH_SHORT).show();
+
+                    }else {
+
+                        curLat = location.getLatitude();
+                        curLng = location.getLongitude();
+
+                        // Weather service
+
+                        WeatherService weatherService = new WeatherService();
+                        weatherService.execute(Common.apiRequest(String.valueOf(curLat), String.valueOf(curLng)));
+
+                        earthImage.setImageResource(R.drawable.earth3);
+                        sunTV.setText("");
+                        sunsetTV.setText("");
+                        humidityTV.setText("");
+                        pressureTV.setText("");
+                        tempMinTV.setText("");
+                        tempMaxTV.setText("");
+                        windTV.setText("");
 
 
-            // Weather service
+                    }
+                }
+            });
 
-            WeatherService weatherService = new WeatherService();
-            weatherService.execute(Common.apiRequest(String.valueOf(curLat), String.valueOf(curLng)));
+        } else{
 
-            earthImage.setImageResource(R.drawable.earth3);
-            sunTV.setText("");
-            sunsetTV.setText("");
-            humidityTV.setText("");
-            pressureTV.setText("");
-            tempMinTV.setText("");
-            tempMaxTV.setText("");
-            windTV.setText("");
+                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                 startActivity(intent);
+              }
 
-        }
     }
-    // end
+    //end crazy things
 
     @Override
     protected void onPause() {
         super.onPause();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        locationManager.removeUpdates(listener);
+        // save state is not ready yet
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        locationManager.requestLocationUpdates(PROVIDER, 20000, 2, listener);
+        // save state is not ready yet
+
     }
-
-
-    LocationListener listener = new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            if (location == null) {
-                Toast.makeText(getApplicationContext(), "Location Not Found", Toast.LENGTH_SHORT).show();
-            } else {
-
-                curLat = location.getLatitude();
-                curLng = location.getLongitude();
-
-            }
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-            Toast.makeText(getBaseContext(), "GPS is turned on!! ",Toast.LENGTH_SHORT).show();
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-            //if GPS is disabele , send user to setting panel for enabling GPS
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-
-        }
-    };
-
     //Button
     public void goToMap(View view) {
         Intent intent = new Intent(this, MapActivity.class);
@@ -185,7 +131,8 @@ public class MainActivity extends AppCompatActivity {
     }
     //Reset Button
     public void resetCurrentWeather(View view) {
-        showLocation(location);
+
+        showLocation();
 
         earthImage.setImageResource(R.drawable.earth3);
         lattv.setText("");
@@ -206,7 +153,8 @@ public class MainActivity extends AppCompatActivity {
     }
     // Show Location Button
     public void latitudeClick(View view) {
-        showLocation(location);
+
+        showLocation();
 
         lattv.setText("Latitude:   " + curLat);
         lngtv.setText("Longitude:  " + curLng);
@@ -233,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Details button
     public void detailsClick(View view) {
         earthImage.setImageResource(R.drawable.transparent_earth2);
 

@@ -63,6 +63,7 @@ public class MapActivity extends AppCompatActivity {
         }
         if(list == null || list.isEmpty()){
             Toast.makeText(this, "Location is not founded", Toast.LENGTH_SHORT).show();
+
         } else {
 
             Address add = list.get(0);
@@ -92,6 +93,11 @@ public class MapActivity extends AppCompatActivity {
     public void searchLocationClick(View view) {
         location = editText.getText().toString();
 
+        //for deleting previous data
+        searchCityTv.setText("");
+        searchLat.setText("");
+        searchLng.setText("");
+
         Geocoder gc = new Geocoder(this);
         List<Address> list = null;
         try {
@@ -101,6 +107,7 @@ public class MapActivity extends AppCompatActivity {
         }
         if(list == null || list.isEmpty()){
             Toast.makeText(this, "Location is not founded", Toast.LENGTH_SHORT).show();
+
         } else {
 
             Address add = list.get(0);
@@ -114,8 +121,8 @@ public class MapActivity extends AppCompatActivity {
             searchLat.setText(String.valueOf("Latitude: "+latMap));
             searchLng.setText(String.valueOf("Longitude: "+lngMap));
 
-        }
 
+        }
 
     }
 }
