@@ -1,7 +1,10 @@
 package com.example.user.goodweatherapp;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MapActivity extends AppCompatActivity {
 
@@ -124,5 +129,34 @@ public class MapActivity extends AppCompatActivity {
 
         }
 
+    }
+     //Microfon button
+    public void microfonClick(View view) {
+        editText.setText("");
+
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        try{
+            startActivityForResult(intent, 0);
+        }catch (ActivityNotFoundException e){
+            Toast.makeText(getApplicationContext(),"Your device doesn't support speech input",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if(requestCode == 0 && data != null){
+            ArrayList<String> list = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            if(list.isEmpty()){
+               return;
+            } else {
+                editText.setText(list.get(0));
+            }
+
+        }
     }
 }
