@@ -38,8 +38,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+
+
+        init();
+        showLocation();
+
+    }
+
+    public void init(){
+
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("Loading...");
+        dialog.show();
+
         countryTv = (TextView) findViewById(R.id.countryId);
         temperatureTv = (TextView) findViewById(R.id.tempertaureId);
         description = (TextView) findViewById(R.id.description);
@@ -56,11 +68,6 @@ public class MainActivity extends AppCompatActivity {
         windTV = (TextView)findViewById(R.id.windId);
 
 
-        dialog = new ProgressDialog(this);
-        dialog.setMessage("Loading...");
-        dialog.show();
-
-         showLocation();
 
     }
 

@@ -119,7 +119,7 @@ public class WeatherService extends AsyncTask<String, String, String > {
             speed = Double.parseDouble(windObject.getString("speed"));
             //end wind
 
-            String countryName = parentObject.getString("name");
+            String countryName = parentObject.getString("name"); //String country name from JSON
 
 
             MainActivity.countryTv.setText(countryName);
