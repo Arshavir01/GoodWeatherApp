@@ -15,7 +15,7 @@ import io.nlopez.smartlocation.OnLocationUpdatedListener;
 import io.nlopez.smartlocation.SmartLocation;
 
 public class MainActivity extends AppCompatActivity {
-
+    static ImageView iconImage;
     static TextView countryTv;
     static TextView temperatureTv;
     static TextView description;
@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         dialog = new ProgressDialog(this);
         dialog.setMessage("Loading...");
         dialog.show();
+
+        iconImage = (ImageView)findViewById(R.id.iconImageViewId);
 
         countryTv = (TextView) findViewById(R.id.countryId);
         temperatureTv = (TextView) findViewById(R.id.tempertaureId);
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // Weather service
 
-                        WeatherService weatherService = new WeatherService();
+                        WeatherService weatherService = new WeatherService(MainActivity.this);
                         weatherService.execute(Common.apiRequest(String.valueOf(curLat), String.valueOf(curLng)));
 
                         earthImage.setImageResource(R.drawable.earth3);

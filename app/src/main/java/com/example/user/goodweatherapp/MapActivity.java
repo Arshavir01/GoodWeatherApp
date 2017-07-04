@@ -82,7 +82,7 @@ public class MapActivity extends AppCompatActivity {
             String latitudeMap = String.valueOf(latMap);
             String longitudeMap = String.valueOf(lngMap);
 
-            WeatherService weatherService = new WeatherService();
+            WeatherService weatherService = new WeatherService(MapActivity.this);
             weatherService.execute(Common.apiRequest(String.valueOf(latitudeMap), String.valueOf(longitudeMap)));
 
             MainActivity.lattv.setText("");

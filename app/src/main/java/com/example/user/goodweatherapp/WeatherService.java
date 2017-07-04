@@ -1,6 +1,10 @@
 package com.example.user.goodweatherapp;
 
+import android.content.Context;
 import android.os.AsyncTask;
+
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +31,12 @@ public class WeatherService extends AsyncTask<String, String, String > {
     static double tempMin;
     static double tempMax;
     static double speed;
+
+    Context context;
+
+    public WeatherService(Context context){
+        this.context = context;
+    }
 
 
     @Override
@@ -99,6 +109,10 @@ public class WeatherService extends AsyncTask<String, String, String > {
             JSONArray jsonArray = parentObject.getJSONArray("weather");
             JSONObject weatherObj = jsonArray.getJSONObject(0);
             String desc = weatherObj.getString("description"); //Clouds
+            String icon = weatherObj.getString("icon");
+
+            //Picasso Library
+            Picasso.with(context).load("http://openweathermap.org/img/w/"+icon+".png").into(MainActivity.iconImage);
 
             //main
             JSONObject jsonObject = new JSONObject(parentObject.getString("main"));//main object
