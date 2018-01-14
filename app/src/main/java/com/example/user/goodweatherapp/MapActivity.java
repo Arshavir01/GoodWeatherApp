@@ -57,7 +57,7 @@ public class MapActivity extends AppCompatActivity {
         MainActivity.tempMaxTV.setText("");
         MainActivity.windTV.setText("");
 
-        MainActivity.earthImage.setImageResource(R.drawable.earth3);
+        MainActivity.earthImage.setImageResource(R.drawable.earth6);
 
         Geocoder gc = new Geocoder(this);
         List<Address> list = null;

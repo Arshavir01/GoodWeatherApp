@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                         WeatherService weatherService = new WeatherService(MainActivity.this);
                         weatherService.execute(Common.apiRequest(String.valueOf(curLat), String.valueOf(curLng)));
 
-                        earthImage.setImageResource(R.drawable.earth3);
+                        earthImage.setImageResource(R.drawable.earth6);
                         sunTV.setText("");
                         sunsetTV.setText("");
                         humidityTV.setText("");
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
         showLocation();
 
-        earthImage.setImageResource(R.drawable.earth3);
+        earthImage.setImageResource(R.drawable.earth6);
         lattv.setText("");
         lngtv.setText("");
         sunTV.setText("");
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         lattv.setText("Latitude:   " + curLat);
         lngtv.setText("Longitude:  " + curLng);
 
-        earthImage.setImageResource(R.drawable.earth3);
+        earthImage.setImageResource(R.drawable.earth6);
         sunTV.setText("");
         sunsetTV.setText("");
         humidityTV.setText("");

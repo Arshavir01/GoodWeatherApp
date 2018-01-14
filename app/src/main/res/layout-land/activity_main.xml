@@ -9,7 +9,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    android:background="@drawable/back"
+    android:background="@color/colorPurple"
     tools:context="com.example.user.goodweatherapp.MainActivity">
 
     <TextView
@@ -158,7 +158,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/earth3"
+        android:src="@drawable/earth6"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="125dp"
         android:id="@+id/earthImageViewId" />
